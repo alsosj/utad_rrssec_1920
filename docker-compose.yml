@@ -1,0 +1,59 @@
+version: '3.7'
+services:
+  nginx:
+    restart: always
+    image: nginx:1.17
+    container_name: nginx
+    ports:
+      - "80:8000"
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./static:/static
+    depends_on:
+      - backend
+  backend:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./config/backend/Dockerfile
+    container_name: backend
+    working_dir: /app/
+    entrypoint:
+      - /entrypoint.sh
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+      - ./static:/static
+      - ./frontend:/app/frontend/
+    environment:
+      - DJANGO_SETTINGS_MODULE=mi_rrss.settings
+      - PYTHONUNBUFFERED=1
+    expose:
+      - "8000"
+  frontend:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./config/frontend/Dockerfile
+    container_name: frontend
+    working_dir: /app/
+    entrypoint:
+      - /entrypoint.sh
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - ./static:/static
+  db:
+    image: postgres:12.2
+    container_name: db
+    volumes:
+      #- ./postgres-data:/var/lib/postgresql/data # MACOS/LINUX
+      - postgres:/var/lib/postgresql/data  # Windows
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+  redis:
+    image: redis:6.0-rc
+volumes:  # En Linux/macOS podemos quitar los volumes
+  postgres:
