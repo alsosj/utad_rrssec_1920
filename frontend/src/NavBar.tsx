@@ -1,5 +1,6 @@
 import React from 'react';
 import {AppBar, Typography, Toolbar, Button} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 type NavBarProps = {
     logged_in: boolean;
@@ -16,9 +17,10 @@ const NavBar = (props: NavBarProps) => {
                         logged_in ? 'Hola, ' + localStorage.getItem('username') : 'Hola anónimo'
                     }
                 </Typography>
-                <a href="/">Home</a>
-                <a href="/login">Login</a>
-                <a href="/register">Registro</a>
+                <Link to="/">Home</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/register">Registro</Link>
+                <Link to="/chat">Chat</Link>
             </Toolbar>
         </AppBar>
     );
