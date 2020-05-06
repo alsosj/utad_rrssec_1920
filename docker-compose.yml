@@ -25,7 +25,7 @@ services:
     volumes:
       - ./backend:/app
       - ./static:/static
-      - ./frontend:/app/frontend/
+      #- ./frontend:/app/frontend/
     environment:
       - DJANGO_SETTINGS_MODULE=mi_rrss.settings
       - PYTHONUNBUFFERED=1
@@ -45,6 +45,8 @@ services:
     volumes:
       - ./frontend:/app
       - ./static:/static
+    environment:
+      - NODE_ENV=development
   db:
     image: postgres:12.2
     container_name: db
@@ -55,5 +57,6 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "trust"
   redis:
     image: redis:6.0-rc
+    container_name: redis
 volumes:  # En Linux/macOS podemos quitar los volumes
   postgres:

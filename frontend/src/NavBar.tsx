@@ -18,6 +18,7 @@ const NavBar = (props: NavBarProps) => {
                     }
                 </Typography>
                 <Link to="/">Home</Link>
+                <Link to="/twitter">Twitter</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/register">Registro</Link>
                 <Link to="/chat">Chat</Link>

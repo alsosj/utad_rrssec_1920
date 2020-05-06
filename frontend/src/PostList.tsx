@@ -5,11 +5,6 @@ import axios from 'axios';
 import {Button} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 
-let config = {
-    headers: {
-        Authorization: `JWT ${localStorage.getItem("session")}`
-    }
-};
 class PostList extends Component {
 
     state = {
@@ -19,9 +14,7 @@ class PostList extends Component {
     };
 
     componentDidMount(): void {
-
-        console.log(axios.defaults);
-        axios.get('/api/post/', config).then((r) => {
+        axios.get('/api/post/').then((r) => {
             console.log(r);
             this.setState({
                 posts: r.data,
@@ -40,7 +33,7 @@ class PostList extends Component {
     };
 
     onDeletePost = (postId: number) => {
-        axios.delete('/api/post/' + postId +'/', config).then(r => {
+        axios.delete('/api/post/' + postId +'/').then(r => {
             if (r.status === 200) {
                 const new_posts = this.state.posts.filter((p: any) => {
                     return p.id !== postId;
@@ -69,7 +62,7 @@ class PostList extends Component {
                     axios.post('/api/post/', {
                         title: this.state['tf_title'],
                         content: this.state['tf_content']
-                    }, config).then(r => {
+                    }).then(r => {
                         console.log(r);
                         this.setState({
                             posts: [...this.state.posts, r.data]

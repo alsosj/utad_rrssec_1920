@@ -21,6 +21,7 @@ from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token
 
 from post.api import PostViewSet, UserViewSet
+from post.views import use_twitter
 
 router = routers.DefaultRouter()
 router.register(r'post', PostViewSet, basename='Post')
@@ -30,5 +31,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('^api/', include(router.urls)),
     path('auth/', obtain_jwt_token),  # Sesión
+    path('twitter/', use_twitter),
     url(r'', TemplateView.as_view(template_name='index.html')),
 ]

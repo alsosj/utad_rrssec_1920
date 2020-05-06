@@ -26,7 +26,7 @@ type Config = {
 };
 
 export function register(config?: Config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator && process.env.PUBLIC_URL) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(
       process.env.PUBLIC_URL,
@@ -38,6 +38,7 @@ export function register(config?: Config) {
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
       return;
     }
+
 
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
