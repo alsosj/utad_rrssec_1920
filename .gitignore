@@ -220,6 +220,6 @@ sketch
 
 webpack-stats.json
 yarn.lock
-static
+/static/
 
 # End of https://www.gitignore.io/api/react,django,pycharm
