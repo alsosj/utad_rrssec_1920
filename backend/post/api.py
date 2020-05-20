@@ -28,9 +28,6 @@ class UserViewSet(ModelViewSet):
 
 
 class PostViewSet(ModelViewSet):
-	#queryset = Post.objects.all()
-	permission_classes = (AllowAny,)
-
 	def get_queryset(self):
 		mode = self.request.query_params.get('filterByUser', None)
 		if mode:

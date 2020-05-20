@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 import axios from "axios";
+import {AuthenticationService} from "./services";
 
 type RegistrationFormProps = {
     on_register: any;
+    history: any;
 }
 
 type RegistrationFormState = {
@@ -32,12 +34,12 @@ class RegistrationForm extends Component<RegistrationFormProps, RegistrationForm
 
 
     onSubmit = (event: any) => {
-        console.log(this.state);
         event.preventDefault();
-        axios.post('http://127.0.0.1:8000/api/user/', this.state).then(r => {
-            console.log(r);
-        });
-    };
+        AuthenticationService.register(this.state.username, this.state.password).then(() => {
+            AuthenticationService.login(this.state.username, this.state.password).then(() => {
+                this.props.history.push('');
+            });
+        });};
 
 
     render() {

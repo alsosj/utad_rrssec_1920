@@ -6,7 +6,7 @@ import twitter
 
 
 # Create your views here.
-from secret import CONSUMER_KEY, CONSUMER_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
+#from secret import CONSUMER_KEY, CONSUMER_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
 
 
 def use_twitter(request):
@@ -19,10 +19,10 @@ def use_twitter(request):
     data = json.loads(request.body)
 
     api = twitter.Api(
-        consumer_key=CONSUMER_KEY,
-        consumer_secret=CONSUMER_SECRET_KEY,
-        access_token_key=ACCESS_TOKEN,
-        access_token_secret=ACCESS_TOKEN_SECRET
+        consumer_key='CONSUMER_KEY',
+        consumer_secret='CONSUMER_SECRET_KEY',
+        access_token_key='ACCESS_TOKEN',
+        access_token_secret='ACCESS_TOKEN_SECRET'
     )
 
     action = data.get('action', None)

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import {AuthenticationService} from "./services";
 
 type LoginFormProps = {
     on_login: any;
@@ -19,10 +20,7 @@ class LoginForm extends Component<LoginFormProps, LoginFormState> {
 
     onSubmit = (event: any) => {
         event.preventDefault();
-        axios.post('/auth/', this.state).then( r => {
-            localStorage.setItem('session', r.data.token);
-            localStorage.setItem('username', r.data.user.username);
-            axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem("session")}`;
+        AuthenticationService.login(this.state.username, this.state.password).then(() => {
             this.props.history.push('');
         });
     };
